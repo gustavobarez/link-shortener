@@ -8,6 +8,7 @@ import java.util.Base64;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.gustavobarez.link_shortener.entity.Link;
 import com.gustavobarez.link_shortener.entity.LinkRequestDTO;
@@ -45,6 +46,10 @@ public class LinkService {
         repository.save(link);
 
         return new LinkResponseDTO(link);
+    }
+
+    public Optional<Link> redirect(@PathVariable String shortUrl) {
+        return repository.findByShortUrl(shortUrl);
     }
 
     public String shortUrl(String originalUrl) {
