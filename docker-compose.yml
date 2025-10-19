@@ -1,0 +1,11 @@
+services:
+  mongo:
+    image: mongo:5.0
+    container_name: links-service-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - links_db_data:/data/db
+
+volumes:
+  links_db_data:
