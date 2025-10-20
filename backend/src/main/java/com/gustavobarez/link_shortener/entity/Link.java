@@ -26,6 +26,10 @@ public class Link {
 
     private String shortUrl;
 
+    private String publicId;
+
+    private String password;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;

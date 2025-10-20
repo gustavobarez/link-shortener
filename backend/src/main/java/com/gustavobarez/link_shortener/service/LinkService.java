@@ -6,11 +6,13 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.gustavobarez.link_shortener.entity.Link;
+import com.gustavobarez.link_shortener.entity.LinkDeleteRequestDTO;
 import com.gustavobarez.link_shortener.entity.LinkRequestDTO;
 import com.gustavobarez.link_shortener.entity.LinkResponseDTO;
 import com.gustavobarez.link_shortener.repository.LinkRepository;
@@ -40,6 +42,8 @@ public class LinkService {
         Link link = Link.builder()
                 .originalUrl(originalUrl)
                 .shortUrl(shortUrl)
+                .publicId(UUID.randomUUID().toString())
+                .password(UUID.randomUUID().toString())
                 .createdAt(LocalDateTime.now())
                 .build();
 
@@ -60,9 +64,19 @@ public class LinkService {
             String encoded = Base64.getUrlEncoder().withoutPadding().encodeToString(hash);
 
             return encoded.substring(0, 6);
-
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteShorterUrl(LinkDeleteRequestDTO dto) {
+        var link = repository.findByPublicId(dto.publicId()).orElseThrow(() -> new IllegalArgumentException("Invalid publicId"));
+        if (link.getPassword().equals(dto.password())) {
+            link.setDeletedAt(LocalDateTime.now());
+            repository.save(link);
+        }
+        if (!link.getPassword().equals(dto.password())) {
+            throw new IllegalArgumentException("Invalid password!");
         }
     }
 

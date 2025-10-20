@@ -12,4 +12,6 @@ public interface LinkRepository extends MongoRepository<Link, String> {
     Optional<Link> findByOriginalUrl(String originalUrl);
 
     Optional<Link> findByShortUrl(String shortUrl);
+
+    Optional<Link> findByPublicId(String publicId);
 }
