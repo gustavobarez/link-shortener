@@ -6,12 +6,12 @@ import { ThemeService } from '../services/theme.service';
   standalone: true,
   imports: [],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  title = "Link Shortener";
+  title = 'Link Shortener';
 
-  constructor(private themeService: ThemeService) {}
+  constructor(public themeService: ThemeService) {}
 
   changeTheme() {
     this.themeService.toggleTheme();
