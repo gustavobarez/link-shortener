@@ -1,1 +1,38 @@
-<p>home works!</p>
+<div class="home-container">
+  <h1>Short your url more easier</h1>
+  <div class="input-area">
+    <input
+      type="text"
+      [(ngModel)]="urlInput"
+      placeholder="Paste your long link here..."
+    />
+    <button (click)="shorten()">
+      <i class="fa-solid fa-bolt"></i> Shorten
+    </button>
+  </div>
+  <p>
+    <i class="fa-solid fa-circle-info"></i> Each shorten url has a ID and a password, be sure to save it. You will need
+    later
+  </p>
+  <div class="output-area">
+    <p><i class="fas fa-link"></i> https://localhost:8080/api/v1/url/{{shortUrl}}</p>
+    <p><i class="fa-solid fa-address-card"></i> ID: {{ resultPublicId }}</p>
+    <p><i class="fa-solid fa-fingerprint"></i> Password: {{ resultPassword }}</p>
+  </div>
+  <p><i class="fa-solid fa-arrow-down"></i> Delete a shortened url</p>
+  <div class="delete-input-area">
+    <label>ID</label>
+    <input
+      type="text"
+      [(ngModel)]="deletePublicId"
+      placeholder="Paste your url id here..."
+    />
+    <label>Password</label>
+    <input
+      type="text"
+      [(ngModel)]="deletePassword"
+      placeholder="Paste your url password here..."
+    />
+    <button (click)="delete()"><i class="fa-solid fa-trash"></i> Delete</button>
+  </div>
+</div>
