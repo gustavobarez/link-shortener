@@ -1,0 +1,22 @@
+i {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  padding-left: 205px;
+}
+
+.text-area {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  padding-left: 205px;
+  margin-left: 50px;
+  margin-top: -35px;
+}
+
+footer p,
+footer h1 {
+  margin: 0;
+}
