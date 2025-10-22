@@ -10,17 +10,46 @@
       <i class="fa-solid fa-bolt"></i> Shorten
     </button>
   </div>
-  <p>
-    <i class="fa-solid fa-circle-info"></i> Each shorten url has a ID and a password, be sure to save it. You will need
-    later
-  </p>
-  <div class="output-area">
-    <p><i class="fas fa-link"></i> https://localhost:8080/api/v1/url/{{shortUrl}}</p>
-    <p><i class="fa-solid fa-address-card"></i> ID: {{ resultPublicId }}</p>
-    <p><i class="fa-solid fa-fingerprint"></i> Password: {{ resultPassword }}</p>
+  <div class="result-card" *ngIf="showOutput">
+    <div class="card-header">
+      <i class="fa-solid fa-circle-check"></i>
+      <div>
+        <h3>Link Created!</h3>
+        <p>Your link is ready to use</p>
+      </div>
+    </div>
+
+    <div class="link-section" (click)="openLink()">
+      <i class="fas fa-link"></i>
+      <div>
+        <p class="link-url">http://localhost:8080/api/v1/url/{{ shortUrl }}</p>
+        <span>Click to open</span>
+      </div>
+      <i class="fa-solid fa-arrow-up-right-from-square"></i>
+    </div>
+
+    <div class="credentials-section" title="Copy to clipboard">
+      <div class="credential-box">
+        <p class="label"><i class="fa-solid fa-key"></i> PASSWORD</p>
+        <p class="value" (click)="copy(resultPassword)">{{ resultPassword }}</p>
+      </div>
+      <div class="credential-box" title="Copy to clipboard">
+        <p class="label"><i class="fa-solid fa-hashtag"></i> ID</p>
+        <p class="value" (click)="copy(resultPublicId)">{{ resultPublicId }}</p>
+      </div>
+    </div>
+
+    <div class="warning">
+      <i class="fa-solid fa-circle-info"></i>
+      <p>
+        Save the password and ID - you will need them to delete this link later.
+      </p>
+    </div>
   </div>
-  <p><i class="fa-solid fa-arrow-down"></i> Delete a shortened url</p>
-  <div class="delete-input-area">
+  <button id="delete-button" (click)="showDelete()">
+    <i class="fa-solid fa-arrow-down"></i> Delete a shortened url
+  </button>
+  <div class="delete-input-area" *ngIf="showDeleteArea">
     <label>ID</label>
     <input
       type="text"
